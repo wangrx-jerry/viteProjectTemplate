@@ -2,7 +2,6 @@
 
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 
-
 import publicPageRouter from './modules/public'
 
 export const DEMO = publicPageRouter
@@ -14,7 +13,8 @@ const viewRoutes: RouteRecordRaw[] = []
 const routerContext = import.meta.glob('./modules/*.ts', { eager: true })
 for (const [key, value] of Object.entries(routerContext)) {
 	if (publicPage.some((val) => key.includes(val))) continue
-	for (const n of (value as any).default) {
+	const module = value as { default: RouteRecordRaw[] }
+	for (const n of module.default) {
 		viewRoutes.push(n)
 	}
 }
@@ -27,14 +27,11 @@ export const constantRoutes: RouteRecordRaw[] = [
 	{
 		path: '/',
 		component: () => import('@/views/home/index.vue'),
-		children: [
-			...publicPageRouter
-		]
+		children: [...publicPageRouter]
 	}
 ]
 
 export const asyncRoutes: RouteRecordRaw[] = [...viewRoutes]
-
 
 const router = createRouter({
 	history: createWebHistory(),

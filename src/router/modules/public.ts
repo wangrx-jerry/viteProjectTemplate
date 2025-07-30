@@ -10,9 +10,8 @@ const componentsRouter: RouteRecordRaw[] = [
 		name: 'Module1SomePagePublic',
 		component: async () => await import(/* webpackChunkName: "public" */ '@/views/module1/somePage/Public.vue'),
 		meta: {
-			title: 'Module1SomePagePublic',
+			title: 'Module1SomePagePublic'
 		}
-	},
-
+	}
 ]
 export default componentsRouter
