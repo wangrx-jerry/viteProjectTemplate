@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1>Some Module Some Page</h1>
+		<h1>Module2</h1>
 	</div>
 </template>
 

@@ -18,6 +18,7 @@ for (const [key, value] of Object.entries(routerContext)) {
 		viewRoutes.push(n)
 	}
 }
+
 export const constantRoutes: RouteRecordRaw[] = [
 	{
 		path: '/:pathMatch(.*)*',
@@ -35,7 +36,7 @@ export const asyncRoutes: RouteRecordRaw[] = [...viewRoutes]
 
 const router = createRouter({
 	history: createWebHistory(),
-	routes: constantRoutes
+	routes: [...constantRoutes, ...viewRoutes]
 })
 
 export default router

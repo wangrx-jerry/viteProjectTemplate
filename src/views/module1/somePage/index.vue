@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1>Some Module Some Page</h1>
+		<h1>Module1</h1>
 	</div>
 </template>
 
@@ -12,7 +12,7 @@ export default {
 			a: 1,
 			b: 2,
 
-			c: 3,
+			c: 3
 		}
 	}
 }

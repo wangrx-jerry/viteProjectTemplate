@@ -25,6 +25,11 @@ module.exports = {
 			typescript: {
 				alwaysTryTypes: true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
 				project: './tsconfig.json'
+			},
+			// 路径别名解析器 - 支持路径别名（如 @ 指向 src）的模块解析
+			alias: {
+				map: [['@', './src']],
+				extensions: ['.js', '.ts', '.jsx', '.tsx', '.vue']
 			}
 		}
 	},
