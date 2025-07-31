@@ -1,0 +1,243 @@
+---
+description: Vue 3 选项式 API 中混入 (Mixins) 的最佳实践和使用指南
+globs: ["*.vue", "*.js", "*.ts"]
+alwaysApply: true
+---
+
+# Vue 3 选项式 API 中的混入 (Mixins)
+
+混入 (Mixins) 是 Vue 选项式 API 中实现代码复用的主要机制。本规则提供了混入的最佳实践和使用指南。
+
+## 基本概念
+
+混入对象可以包含任何组件选项，当组件使用混入时，混入的选项将被"混入"到组件自身的选项中。
+
+```javascript
+// 定义混入对象
+const myMixin = {
+  data() {
+    return {
+      mixinData: 'Hello from mixin'
+    }
+  },
+  methods: {
+    mixinMethod() {
+      console.log('This method is from mixin')
+    }
+  },
+  mounted() {
+    console.log('Mixin hook called')
+  }
+}
+
+// 在组件中使用
+export default {
+  mixins: [myMixin],
+  data() {
+    return {
+      componentData: 'Hello from component'
+    }
+  },
+  mounted() {
+    console.log('Component hook called')
+    // 输出: "Mixin hook called" 然后是 "Component hook called"
+  }
+}
+```
+
+## 混入的组织与结构
+
+### 目录结构
+
+```
+src/
+  mixins/
+    form-validation.js
+    auth-check.js
+    data-fetching.js
+    ...
+```
+
+### 混入文件的结构
+
+每个混入文件应该专注于一个功能点，并有明确的命名：
+
+```javascript
+// src/mixins/form-validation.js
+export default {
+  data() {
+    return {
+      formErrors: {},
+      isSubmitting: false
+    }
+  },
+  methods: {
+    validateForm() {
+      // 验证逻辑
+    },
+    resetForm() {
+      // 重置逻辑
+    }
+  }
+}
+```
+
+## 最佳实践
+
+### 1. 专注于单一职责
+
+每个混入应该关注单一的功能或逻辑关注点。
+
+```javascript
+// 好的做法：单一职责
+// pagination-mixin.js
+export const paginationMixin = {
+  data() {
+    return {
+      currentPage: 1,
+      pageSize: 10
+    }
+  },
+  methods: {
+    nextPage() { /* ... */ },
+    prevPage() { /* ... */ },
+    goToPage(page) { /* ... */ }
+  }
+}
+```
+
+### 2. 避免命名冲突
+
+在混入中使用前缀或后缀来避免与组件的数据和方法发生命名冲突。
+
+```javascript
+// 推荐：使用前缀
+export const formMixin = {
+  data() {
+    return {
+      formIsValid: false,
+      formErrors: {}
+    }
+  },
+  methods: {
+    formValidate() { /* ... */ },
+    formReset() { /* ... */ }
+  }
+}
+```
+
+### 3. 清晰的文档
+
+为每个混入提供清晰的文档，说明其功能、选项和使用方法。
+
+```javascript
+/**
+ * 表单验证混入
+ * 提供表单验证功能和状态管理
+ *
+ * 使用方法：
+ * import { formValidationMixin } from '@/mixins/form-validation'
+ *
+ * export default {
+ *   mixins: [formValidationMixin],
+ *   // ...
+ * }
+ */
+export const formValidationMixin = {
+  // ...
+}
+```
+
+### 4. 混入间的组合
+
+当需要组合多个混入时，注意它们的依赖关系和优先级。
+
+```javascript
+// 组件使用多个混入
+export default {
+  mixins: [
+    authorizationMixin, // 基础认证
+    loggingMixin,       // 日志功能
+    formMixin           // 表单处理
+  ],
+  // ...
+}
+```
+
+### 5. 使用全局混入谨慎
+
+全局混入会影响每个单独创建的 Vue 实例，包括第三方组件，应该谨慎使用。
+
+```javascript
+// 谨慎使用全局混入
+Vue.mixin({
+  created() {
+    const myOption = this.$options.myOption
+    if (myOption) {
+      console.log(myOption)
+    }
+  }
+})
+```
+
+## 选项合并策略
+
+了解 Vue 混入的合并策略：
+
+1. **数据对象**：递归合并，组件数据优先
+2. **钩子函数**：合并为数组，混入的钩子先调用
+3. **值为对象的选项**：合并为一个对象，键名冲突时组件优先
+
+```javascript
+const mixin = {
+  methods: {
+    foo() {
+      console.log('foo from mixin')
+    },
+    conflicting() {
+      console.log('from mixin')
+    }
+  }
+}
+
+const component = {
+  mixins: [mixin],
+  methods: {
+    bar() {
+      console.log('bar from component')
+    },
+    conflicting() {
+      console.log('from component')
+    }
+  }
+}
+
+// 结果
+// component.methods.foo() // => "foo from mixin"
+// component.methods.bar() // => "bar from component"
+// component.methods.conflicting() // => "from component"
+```
+
+## 何时使用混入 vs 替代方案
+
+### 使用混入的场景
+
+- 在多个组件之间共享简单的功能
+- 需要访问组件实例 (this) 的功能
+- 需要使用生命周期钩子的功能
+
+### 替代方案
+
+- **简单工具函数**：对于不需要访问组件实例的纯功能
+- **Vuex**：对于应用级别的状态管理
+- **Provide/Inject**：对于深层组件树中的依赖注入
+- **组件拆分**：将复杂组件拆分为小组件，使用组件组合而非混入
+
+## 总结
+
+- 每个混入应该专注于单一职责
+- 使用命名约定避免冲突
+- 提供清晰的文档
+- 了解选项合并策略
+- 谨慎使用全局混入
+- 在合适的场景考虑替代方案

@@ -1,20 +1,5 @@
 <template>
-	<div class="wscn-http404-container">
-		<div class="wscn-http404">
-			<div class="pic-404">
-				<img class="pic-404__parent" src="@/assets/images/404_images/404.png" alt="404" />
-				<img class="pic-404__child left" src="@/assets/images/404_images/404_cloud.png" alt="404" />
-				<img class="pic-404__child mid" src="@/assets/images/404_images/404_cloud.png" alt="404" />
-				<img class="pic-404__child right" src="@/assets/images/404_images/404_cloud.png" alt="404" />
-			</div>
-			<div class="bullshit">
-				<div class="bullshit__oops">OOPS!</div>
-				<div class="bullshit__headline">{{ message }}</div>
-				<div class="bullshit__info">请点击下面链接回到首页</div>
-				<el-button type="primary" size="medium" class="bull shit__return-home" @click="$router.replace('/')">回到首页 </el-button>
-			</div>
-		</div>
-	</div>
+	<div>404</div>
 </template>
 
 <script>

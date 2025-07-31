@@ -1,0 +1,22 @@
+diff --git a/node_modules/vxe-table/styles/table.scss b/node_modules/vxe-table/styles/table.scss
+index 4163e56..e9810f8 100644
+--- a/node_modules/vxe-table/styles/table.scss
++++ b/node_modules/vxe-table/styles/table.scss
+@@ -980,7 +980,7 @@
+   }
+   .vxe-tree--node-btn {
+     display: block;
+-    color: lighten($vxe-table-font-color, 20%);
++    color: scale-color($vxe-table-font-color,$lightness: 20%);
+     &:hover {
+       color: $vxe-table-font-color;
+     }
+@@ -1010,7 +1010,7 @@
+       height: 1em;
+       text-align: center;
+       user-select: none;
+-      color: lighten($vxe-table-font-color, 20%);
++      color: scale-color($vxe-table-font-color,$lightness: 20%);
+       &:hover {
+         color: $vxe-table-font-color;
+       }

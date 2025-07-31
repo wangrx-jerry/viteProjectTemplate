@@ -1,0 +1,80 @@
+---
+description: 函数排序约定，规定了在代码文件中如何组织和排序函数
+globs: ["*.js", "*.ts", "*.vue"]
+alwaysApply: true
+---
+
+# 函数排序约定
+
+良好的函数排序可以提高代码的可读性和可维护性。遵循以下原则组织你的函数：
+
+## 基本排序原则
+
+- **组合函数在前**：将调用其他函数的组合函数放在前面
+- **被调用函数在后**：将被其他函数调用的辅助函数放在后面
+- **入口函数优先**：将代表组件或模块主要功能的函数放在最前面
+
+## 实际应用示例
+
+```javascript
+// 正确的排序
+function renderCompleteUI() {
+  renderHeader();
+  renderContent();
+  renderFooter();
+}
+
+function renderHeader() {
+  // 实现头部渲染
+}
+
+function renderContent() {
+  // 实现内容渲染
+}
+
+function renderFooter() {
+  // 实现底部渲染
+}
+```
+
+## Vue 组件中的应用
+
+在 Vue 组件的 `methods` 选项中，同样应用此原则：
+
+```javascript
+export default {
+  methods: {
+    // 主要方法，调用其他方法
+    handleSubmitForm() {
+      if (this.validateForm()) {
+        this.submitData();
+        this.resetForm();
+      }
+    },
+
+    // 被主要方法调用的辅助方法
+    validateForm() {
+      // 表单验证逻辑
+    },
+
+    submitData() {
+      // 提交数据逻辑
+    },
+
+    resetForm() {
+      // 重置表单逻辑
+    }
+  }
+}
+```
+
+## 好处
+
+1. **提高可读性**：遵循从高级到低级的顺序，使代码更易于理解
+2. **便于调试**：当调试高级函数时，其所依赖的函数都位于后面，便于跟踪
+3. **减少滚动**：减少在阅读代码时的滚动需求，因为高级函数通常是我们最先查看的
+
+## 注意事项
+
+- 虽然函数排序很重要，但不要为此过度重构现有代码，除非特别指示
+- 在大型文件中，考虑使用注释来分隔不同的函数组

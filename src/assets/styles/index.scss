@@ -1,0 +1,134 @@
+body {
+  height     : 100%;
+  margin     : 0;
+  overflow   : hidden;
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+  font-size  : 14px;
+  font-weight: 400;
+  color      : #24263b;
+
+  // min-width: 1280px;
+}
+
+html {
+  box-sizing: border-box;
+
+  // min-width: 1280px;
+  height: 100%;
+}
+
+#app {
+  height: 100%;
+}
+
+*::-webkit-scrollbar {
+  /* 滚动条整体样式 */
+  width: 8px;
+
+  /* 高宽分别对应横竖滚动条的尺寸 */
+  height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.162);
+
+  /* 滚动条里面小方块 */
+  border-radius     : 4px;
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.095);
+}
+
+*::-webkit-scrollbar-track {
+  background   : transparent;
+  border-radius: 4px;
+
+  /* 滚动条里面轨道 */
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.101);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// 设置打印预览强制携带背景图片
+* {
+  -webkit-print-color-adjust: exact !important;
+  /* Chrome, Safari */
+  -moz-print-color-adjust   : exact !important;
+  -ms-print-color-adjust    : exact !important;
+  print-color-adjust        : exact !important;
+  color-adjust              : exact !important;
+  /* Firefox */
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+  color          : inherit;
+  text-decoration: none;
+  cursor         : pointer;
+}
+
+div:focus {
+  outline: none;
+}
+
+ul,
+li,
+ol,
+dl {
+  padding   : 0;
+  margin    : 0;
+  list-style: none;
+}
+
+label,
+.table,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+p,
+ul,
+li,
+ol,
+dl {
+  margin-bottom: 0;
+}
+
+input[type='text']:focus,
+input[type='username']:focus,
+input[type='email']:focus,
+input[type='password']:focus,
+textarea:focus {
+  -webkit-appearance: none;
+  outline           : none;
+}
+
+input,
+textarea {
+  -webkit-appearance: none;
+
+  &:-webkit-autofill {
+    -webkit-appearance: none;
+    box-shadow        : 0 0 0 1000px white inset !important;
+  }
+}
+
+table {
+  border-collapse: collapse;
+}

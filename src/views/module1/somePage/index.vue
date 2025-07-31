@@ -4,10 +4,16 @@
 	</div>
 </template>
 
-<script setup lang="ts">
-const a = 1
-let b = 2
-console.log(a, b)
-</script>
+<script>
+export default {
+	name: 'Module1SomePage',
+	data() {
+		return {
+			a: 1,
+			b: 2,
 
-<style scoped lang="scss"></style>
+			c: 3,
+		}
+	}
+}
+</script>

@@ -1,0 +1,19 @@
+{
+	"DisplayStatus: @/components/business/DisplayStatus/index.vue": {
+		"prefix": [
+			"yl-status",
+			"DisplayStatus"
+		],
+		"body": [
+			" <DisplayStatus :value=\"$1\" ${2: color=\"$0\"} />"
+		],
+		"description": "全局组件：状态颜色"
+	},
+	"Print to console from copy": {
+		"prefix": "cl",
+		"body": [
+			"console.log('${CLIPBOARD/(^\\s*)|(\\s*$)|([.]log)//g}>>>', ${CLIPBOARD/(^\\s*)|(\\s*$)|([.]log)//g})"
+		],
+		"description": "从剪切板获取打印的内容"
+	},
+}

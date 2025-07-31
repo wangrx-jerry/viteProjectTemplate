@@ -1,0 +1,131 @@
+---
+description: 早期返回和条件表达式的最佳实践，提高代码可读性和维护性
+globs: ["*.js", "*.ts", "*.vue"]
+alwaysApply: true
+---
+
+# 早期返回和条件表达式
+
+本规则指导如何使用早期返回和条件表达式编写更清晰、更易于维护的代码。
+
+## 早期返回模式
+
+早期返回模式指在函数中尽早处理特殊情况或错误条件，避免过深的嵌套。
+
+### 不推荐的方式（过多嵌套）
+
+```javascript
+function processUserData(user) {
+  if (user) {
+    if (user.isActive) {
+      if (user.permissions) {
+        // 处理用户数据...
+        return result;
+      } else {
+        return null; // 无权限
+      }
+    } else {
+      return null; // 用户不活跃
+    }
+  } else {
+    return null; // 无用户
+  }
+}
+```
+
+### 推荐的方式（早期返回）
+
+```javascript
+function processUserData(user) {
+  if (!user) return null; // 无用户
+  if (!user.isActive) return null; // 用户不活跃
+  if (!user.permissions) return null; // 无权限
+
+  // 处理用户数据...
+  return result;
+}
+```
+
+## 条件表达式的使用
+
+### 对于简单的条件，使用三元运算符
+
+```javascript
+// 不推荐
+let displayName;
+if (user.firstName) {
+  displayName = user.firstName;
+} else {
+  displayName = "Guest";
+}
+
+// 推荐
+const displayName = user.firstName ? user.firstName : "Guest";
+// 或者更简洁的方式
+const displayName = user.firstName || "Guest";
+```
+
+### 对于复杂条件，保持 if-else 语句的清晰度
+
+```javascript
+// 不推荐 - 过于复杂的三元运算符
+const message = user.isAdmin && user.hasPermission("edit")
+  ? user.lastLogin ? `Welcome back, ${user.name}!` : `Welcome, ${user.name}!`
+  : "Access restricted";
+
+// 推荐 - 使用明确的 if-else 结构
+let message;
+if (user.isAdmin && user.hasPermission("edit")) {
+  message = user.lastLogin
+    ? `Welcome back, ${user.name}!`
+    : `Welcome, ${user.name}!`;
+} else {
+  message = "Access restricted";
+}
+```
+
+## Vue 组件中的条件类
+
+在 Vue 组件中，对于条件类名，推荐使用对象语法而非三元运算符。
+
+```vue
+<!-- 不推荐 -->
+<div :class="isActive ? 'active' : ''"></div>
+
+<!-- 推荐 -->
+<div :class="{ active: isActive }"></div>
+```
+
+## 多个条件的处理
+
+对于有多个条件的情况，考虑使用查找表或映射对象代替多个 if-else 或 switch 语句。
+
+```javascript
+// 不推荐
+function getStatusMessage(status) {
+  if (status === 'pending') return '处理中';
+  else if (status === 'approved') return '已批准';
+  else if (status === 'rejected') return '已拒绝';
+  else return '未知状态';
+}
+
+// 推荐
+function getStatusMessage(status) {
+  const statusMessages = {
+    pending: '处理中',
+    approved: '已批准',
+    rejected: '已拒绝',
+    default: '未知状态'
+  };
+
+  return statusMessages[status] || statusMessages.default;
+}
+```
+
+## 总结
+
+- 使用早期返回减少嵌套层级
+- 对简单条件使用三元运算符
+- 对复杂条件保持 if-else 结构的清晰度
+- 在 Vue 组件中优先使用对象语法处理条件类
+- 利用查找表简化多条件判断

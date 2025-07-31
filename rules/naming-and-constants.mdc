@@ -1,0 +1,163 @@
+---
+description: 命名约定和常量使用的最佳实践，确保代码的可读性和可维护性
+globs: ["*.js", "*.ts", "*.vue"]
+alwaysApply: true
+---
+
+# 命名约定和常量使用
+
+良好的命名是编写可读、可维护代码的基础。本规则提供命名约定和常量使用的最佳实践。
+
+## 变量命名原则
+
+### 描述性命名
+
+变量名应清晰表达其用途和包含的数据。
+
+```javascript
+// 不推荐
+const x = user.firstName + ' ' + user.lastName;
+
+// 推荐
+const fullName = user.firstName + ' ' + user.lastName;
+```
+
+### 命名约定
+
+- **变量和函数名**：使用驼峰命名法 (camelCase)
+- **类和组件名**：使用帕斯卡命名法 (PascalCase)
+- **常量**：使用大写下划线命名法 (UPPER_SNAKE_CASE)
+- **私有属性**：以下划线开头 (_privateVar)
+- **布尔值**：使用 is、has、can 等前缀 (isActive, hasPermission)
+
+```javascript
+// 变量和函数（camelCase）
+const userData = getUserData();
+
+// 类和组件（PascalCase）
+class UserProfile {}
+const TableComponent = { /* ... */ };
+
+// 常量（UPPER_SNAKE_CASE）
+const API_BASE_URL = 'https://api.example.com';
+
+// 私有属性（下划线前缀）
+this._privateMethod = function() { /* ... */ };
+
+// 布尔值（描述性前缀）
+const isUserLoggedIn = true;
+const hasAdminAccess = checkPermissions('admin');
+```
+
+## 事件处理函数命名
+
+使用 "handle" 前缀命名事件处理函数，明确表示其作用。
+
+```javascript
+// Vue 组件中
+methods: {
+  handleClick() { /* ... */ },
+  handleSubmit() { /* ... */ },
+  handleKeyDown(event) { /* ... */ }
+}
+```
+
+## 常量优于函数
+
+对于不变的值，使用常量比使用函数更高效。
+
+```javascript
+// 不推荐
+function getStatusTypes() {
+  return ['pending', 'approved', 'rejected'];
+}
+
+// 推荐
+const STATUS_TYPES = ['pending', 'approved', 'rejected'];
+```
+
+在 TypeScript 中，结合类型定义：
+
+```typescript
+// 推荐
+type StatusType = 'pending' | 'approved' | 'rejected';
+const STATUS_TYPES: StatusType[] = ['pending', 'approved', 'rejected'];
+```
+
+## 配置和魔术数字
+
+避免在代码中使用魔术数字或硬编码值，而是使用命名常量。
+
+```javascript
+// 不推荐
+setTimeout(doSomething, 3600000); // 1小时的毫秒数
+
+// 推荐
+const ONE_HOUR_IN_MS = 60 * 60 * 1000;
+setTimeout(doSomething, ONE_HOUR_IN_MS);
+```
+
+## 枚举和常量组织
+
+将相关的常量组织在一起，使用对象或枚举。
+
+```javascript
+// JavaScript
+const HttpStatus = {
+  OK: 200,
+  CREATED: 201,
+  BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
+  NOT_FOUND: 404,
+  SERVER_ERROR: 500
+};
+
+// TypeScript
+enum HttpStatus {
+  OK = 200,
+  CREATED = 201,
+  BAD_REQUEST = 400,
+  UNAUTHORIZED = 401,
+  NOT_FOUND = 404,
+  SERVER_ERROR = 500
+}
+```
+
+## Vue 特定命名约定
+
+- **组件名**：使用多词组合，避免与 HTML 元素冲突 (UserCard 而非 Card)
+- **Prop 名**：在声明时使用驼峰命名，在模板中使用短横线命名 (itemId 声明, item-id 使用)
+- **事件名**：使用短横线命名 (click, change, custom-event)
+
+```vue
+<!-- 模板中使用短横线 -->
+<UserCard :user-id="123" @custom-event="handleEvent" />
+
+<script>
+export default {
+  name: 'UserCard',
+  props: {
+    // 声明时使用驼峰
+    userId: {
+      type: Number,
+      required: true
+    }
+  },
+  methods: {
+    emitEvent() {
+      // 触发事件使用短横线
+      this.$emit('custom-event', { id: this.userId });
+    }
+  }
+}
+</script>
+```
+
+## 总结
+
+- 使用描述性的、符合约定的名称
+- 为事件处理函数添加 "handle" 前缀
+- 优先使用常量而非返回固定值的函数
+- 使用命名常量代替魔术数字和硬编码值
+- 使用对象或枚举组织相关常量
+- 遵循 Vue 特定的命名约定

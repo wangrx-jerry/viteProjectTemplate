@@ -1,0 +1,75 @@
+{
+	"cSpell.words": [
+		"agentid",
+		"antd",
+		"anticon",
+		"axios",
+		"bgblue",
+		"bgpink",
+		"blgray",
+		"btgray",
+		"Cascader",
+		"CLASSNAME",
+		"compositionend",
+		"compositionstart",
+		"daterange",
+		"Decompile",
+		"ding",
+		"dingtalk",
+		"domtoimage",
+		"dragsize",
+		"dubbo",
+		"Echarts",
+		"Elink",
+		"Formily",
+		"gogs",
+		"localforage",
+		"maxlength",
+		"msgbox",
+		"nocheckout",
+		"pantone",
+		"pkgs",
+		"Popconfirm",
+		"prebuild",
+		"pxtorem",
+		"resizeable",
+		"Scence",
+		"sider",
+		"stylelint",
+		"submenu",
+		"Tabbar",
+		"tagsview",
+		"touyang",
+		"treenode",
+		"typeof",
+		"Unmount",
+		"unplugin",
+		"vueuse",
+		"wechart",
+		"ylianscm",
+		"zcvf",
+		"Zentao",
+		"zxvf"
+	],
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": "explicit",
+		"source.fixAll.stylelint": "explicit"
+	},
+	"editor.insertSpaces": false,
+	// 使用 stylelint 自身的校验即可
+	"css.validate": false,
+	"less.validate": false,
+	"scss.validate": false,
+	// 指定 stylelint 校验的文件类型
+	"stylelint.validate": ["css", "less", "postcss", "vue", "scss"],
+	// 使用 prettier 格式化
+	"[vue]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[css]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[scss]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	}
+}

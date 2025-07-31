@@ -1,0 +1,172 @@
+---
+description: Vue 3 选项式 API 和 JavaScript/TypeScript 代码质量规则
+globs: ["*.vue", "*.js", "*.ts"]
+alwaysApply: true
+---
+
+# Vue 3 选项式 API 规则
+
+> **重要提示**：本项目采用 Vue 3 **选项式 API** 和 **组合式 API** 混合开发模式。请确保所有新组件都遵循选项式 API 的模式和最佳实践。
+
+## Vue 3 选项式 API 最佳实践
+- 使用 `data()` 函数返回响应式数据
+- 使用 `methods` 选项定义组件方法
+- 使用 `computed` 选项定义计算属性
+- 使用 `watch` 选项监听数据变化和处理副作用
+- 实现生命周期钩子，如 `created`、`mounted` 等
+- 使用 `props` 和 `emits` 选项定义组件接口
+- 使用 `provide/inject` 选项进行依赖注入
+
+## 文件夹结构
+```
+src/
+  components/    // 通用组件
+  views/         // 页面组件
+  router/        // 路由配置
+  store/         // Vuex 状态管理
+  assets/        // 静态资源
+    utils/         // 工具函数
+  api/           // API 请求
+  mixins/        // 混入文件
+  App.vue        // 根组件
+  main.ts        // 入口文件
+```
+
+## 导入依赖
+以下配置了自动导入，无需在使用时再做导入：
+- 'vue'
+- 'vuex'
+- 'vue-router'
+- 'omit'
+- 'pick'
+- 'intersection'
+- 'uniq'
+- 'uniqBy'
+- 'keyBy'
+- 'groupBy'
+- 'cloneDeep'
+- 'isEqual'
+- 'debounce'
+- 'throttle'
+- 'unionBy'
+- 'uniqueId'
+- 'difference'
+- 'findLastIndex'
+- 'defaults'
+- 'defaultsDeep'
+- 'sortBy'
+
+
+## 组件文件结构
+```vue
+<template>
+  <!-- 模板内容 -->
+</template>
+
+<script>
+export default {
+  name: 'ComponentName',
+  components: {},
+  props: {},
+  emits: [],
+  data() {
+    return {
+      // 响应式数据
+    }
+  },
+  computed: {
+    // 计算属性
+  },
+  watch: {
+    // 侦听器
+  },
+  created() {
+    // 生命周期钩子
+  },
+  mounted() {
+    // 生命周期钩子
+  },
+  methods: {
+    // 方法
+  }
+}
+</script>
+
+<style scoped lang="scss">
+/* CSS 样式 */
+</style>
+```
+
+## Vue 3 附加说明
+1. 使用 TypeScript 提供类型安全
+2. 正确定义 props 和默认值
+3. 在需要时使用 Vue 3 的 Teleport 组件
+4. 实现适当的错误处理机制
+5. 遵循 Vue 3 风格指南和命名约定
+6. 使用 Vite 进行开发和构建
+7. 组件名称使用 PascalCase
+8. 事件名称使用 PascalCase
+9. 在 data 中避免使用箭头函数
+10. methods 中避免使用箭头函数（会导致 this 指向问题）
+
+## Vue 3 代码风格
+1. 遵循项目的 .eslintrc 和 .prettierrc 配置
+2. 组件选项顺序：name, components, props, emits, data, computed, watch, 生命周期钩子, methods
+3. 使用语义化的变量和方法命名
+4. 单文件组件中的代码块顺序：<template>, <script>, <style>
+5. 优先使用 v-bind 简写 :prop 和 v-on 简写 @event
+6. CSS 样式使用 scoped 或 CSS Modules 防止样式污染
+7. 复杂的逻辑应该被分解为更小的方法
+8. 组件应该被设计为单一职责，避免过于复杂
+9. 在模板中避免复杂的表达式，应将其移至计算属性或方法
+10. 使用 v-if/v-else-if/v-else 结构处理条件渲染
+
+## 相关规则文件
+- 函数排序：[function-ordering-conventions.mdc](mdc:function-ordering-conventions.mdc)
+- 条件表达式：[early-returns-and-conditionals.mdc](mdc:early-returns-and-conditionals.mdc)
+- 命名约定：[naming-and-constants.mdc](mdc:naming-and-constants.mdc)
+- Bug处理：[bug-handling-with-todo-comments.mdc](mdc:bug-handling-with-todo-comments.mdc)
+- 代码变更：[minimal-code-changes-rule.mdc](mdc:minimal-code-changes-rule.mdc)
+
+# JavaScript/TypeScript 代码质量规则
+
+## 开发者角色定位
+您是一位高级全栈开发者，具有丰富的知识和经验，属于那种罕见的"10倍生产力"开发者。
+
+## 核心思维模式
+- **简洁性**：编写简单直接的代码
+- **可读性**：确保代码易于阅读和理解
+- **性能**：关注性能，但不要以牺牲可读性为代价过度优化
+- **可维护性**：编写易于维护和更新的代码
+- **可测试性**：确保代码易于测试
+- **可复用性**：编写可重用的组件和函数
+
+## 编码准则
+1. **使用早期返回**：通过早期返回避免嵌套条件，提高可读性
+2. **条件类**：对于类属性，优先使用条件类而非三元运算符
+3. **描述性命名**：使用描述性的变量和函数名，事件处理函数前缀使用"handle"（例如：handleClick）
+4. **常量优于函数**：尽可能使用常量而非函数，适当时定义类型
+5. **正确性和DRY原则**：专注于编写正确、符合最佳实践且不重复(Don't Repeat Yourself)的代码
+6. **函数式和不可变风格**：除非会导致代码过于冗长，否则优先选择函数式、不可变的编程风格
+7. **最小代码变更**：只修改与任务相关的代码部分，避免修改不相关的代码
+
+## 注释和文档
+1. **函数注释**：在每个函数开始处添加说明其功能的注释
+2. **JSDoc注释**：对于JavaScript代码（除非是TypeScript）使用JSDoc注释和现代ES6语法
+
+## 函数排序
+将组合其他函数的函数放在文件的前面。例如，如果有一个带有多个按钮的菜单，应该在按钮之前定义菜单函数。
+
+## 处理Bug
+**TODO注释**：如果在现有代码中发现bug，或者指令导致次优或有bug的代码，添加以"TODO:"开头的注释概述问题。
+
+## 最小代码变更原则
+1. 只修改与任务相关的代码部分
+2. 避免修改不相关的代码
+3. 避免更改现有注释
+4. 除非特别指示，否则避免任何形式的代码清理
+5. 用最少的代码变更完成目标
+6. 代码变更等同于潜在的bug和技术债务
+
+## 准确性描述
+- 执行任务前先描述我的任务，让我确认机器的理解和我的意见一致

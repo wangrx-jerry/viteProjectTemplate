@@ -1,7 +1,36 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+	"compilerOptions": {
+		// 配置说明可参考：https://www.rehiy.com/post/432/
+		"target": "ESNext",
+		"useDefineForClassFields": true,
+		"module": "ESNext",
+		"lib": ["esnext", "DOM", "DOM.Iterable", "scripthost"],
+		"skipLibCheck": true,
+		"noImplicitThis": false,
+
+		/* Bundler mode */
+		"moduleResolution": "Node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"importHelpers": true,
+		"noEmit": true,
+		"allowSyntheticDefaultImports": true, // 允许从没有设置默认导出的模块中默认导入。
+		"allowJs": true,
+		"jsx": "preserve",
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["src/*"] // 使用 "@/" 前缀来导入 "src" 目录下的模块
+		},
+		"types": ["node", "vite/client"],
+
+		/* Linting */
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noFallthroughCasesInSwitch": true
+	},
+	"include": ["src/**/*.ts", "typings/*.d.ts", "src/**/*.tsx", "src/**/*.vue", ".eslintrc.cjs"],
+	"exclude": ["node_modules", "dist"],
+	"references": [{ "path": "./tsconfig.node.json" }]
 }

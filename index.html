@@ -1,13 +1,40 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + Vue + TS</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+
+<head>
+	<meta charset="UTF-8" />
+	<link rel="icon" href="/Eline.png" />
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<title>衣链-客户端</title>
+
+	<!-- 友盟 系统监控 -->
+	<script type="module">
+		// document: //developer.umeng.com/docs/67963/detail/2640168
+		import { getLocalStorageByName } from '/src/store/browser/index.js';
+		var userId = getLocalStorageByName('userInfo')?.userId
+		if (userId && window._czc) window._czc.push(['_setUUid', userId])
+	</script>
+
+	<script>
+		// document: https://web.umeng.com/main.php?c=site&a=getcode&siteid=1281381683
+		var _czc = _czc || [];
+		(function () {
+			var um = document.createElement("script");
+			const monitorID = ['master', 'origin/master'].includes(window.envBranch) ? 1281381683 : 1281381684
+			um.src = `https://v1.cnzz.com/z.js?id=${monitorID}&async=1`;
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(um, s);
+		})();
+	</script>
+
+</head>
+
+<body>
+	<div id="app"></div>
+	<script type="module" src="/src/main.ts"></script>
+	<script src="https://wwcdn.weixin.qq.com/node/wework/wwopen/js/wwLogin-1.2.4.js" defer></script>
+</body>
+
 </html>

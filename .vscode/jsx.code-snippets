@@ -1,0 +1,93 @@
+{
+	"renderStatusColor: statusColor in cell": {
+		"prefix": "renderStatusColor",
+		"body": [
+			"renderValue: (_val) => <DisplayStatus value={_val}${1: color=$0} />"
+		],
+		"description": "全局组件：状态颜色"
+	},
+	"renderDate: Date in cell": {
+		"prefix": "renderDate",
+		"body": [
+			"renderValue: (_val) => <DisplayDate value={_val} />"
+		],
+		"description": "全局组件：单元格中时间显示"
+	},
+	"DisplayStatus: @/components/business/DisplayStatus/index.vue": {
+		"prefix": [
+			"yl-status",
+			"DisplayStatus"
+		],
+		"body": [
+			" <DisplayStatus value={$1} ${2: color=$0} />"
+		],
+		"description": "全局组件：状态颜色"
+	},
+	"column: YLTable.column": {
+		"prefix": [
+			"column",
+			"ylcolumn"
+		],
+		"body": [
+			"{",
+			"title: '$1',",
+			"dataIndex: '$2',",
+			"${3: filter: { type: '$4'}},",
+			"${5: renderValue: (_val, record) => $0 }",
+			"},"
+		],
+		"description": "全局组件：状态颜色"
+	},
+	"renderValue: YLTable.column.render": {
+		"prefix": [
+			"renderValue",
+		],
+		"body": [
+			"renderValue: (_val) => $0 "
+		],
+		"description": "YLTable列render"
+	},
+	"Print to console from copy": {
+		"prefix": "cl",
+		"body": [
+			"console.log('${CLIPBOARD/(^\\s*)|(\\s*$)|([.]log)//g}>>>', ${CLIPBOARD/(^\\s*)|(\\s*$)|([.]log)//g})"
+		],
+		"description": "从剪切板获取打印的内容"
+	},
+	"axios get": {
+		"prefix": "axios get",
+		"body": [
+			"this.axios({",
+			"url: '${CLIPBOARD/(^\\s*)|(\\s*$)|([.]log)//g}',",
+			"params: $1",
+			"}).then(res => {",
+			"const {data} = res",
+			"$0",
+			"})",
+		],
+		"description": "axios get 请求"
+	},
+	"axios post": {
+		"prefix": "axios post",
+		"body": [
+			"this.axios({",
+			"url: '${CLIPBOARD/(^\\s*)|(\\s*$)|([.]log)//g}',",
+			"method: 'post',",
+			"data: $1",
+			"}).then(res => {",
+			"const {data} = res",
+			"$0",
+			"})",
+		],
+		"description": "axios post 请求"
+	},
+	"if": {
+		"prefix": "if",
+		"body": [
+			"if(${CLIPBOARD/(^\\s*)|(\\s*$)|([.]log)//g}){",
+			"$0",
+			"}",
+		],
+		"description": "条件判断"
+	}
+}

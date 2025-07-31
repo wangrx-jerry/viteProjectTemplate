@@ -1,0 +1,63 @@
+diff --git a/node_modules/@vue/runtime-core/dist/runtime-core.cjs.js b/node_modules/@vue/runtime-core/dist/runtime-core.cjs.js
+index f03c4d7..ada4715 100644
+--- a/node_modules/@vue/runtime-core/dist/runtime-core.cjs.js
++++ b/node_modules/@vue/runtime-core/dist/runtime-core.cjs.js
+@@ -2537,7 +2537,7 @@ const KeepAliveImpl = {
+     exclude: [String, RegExp, Array],
+     max: [String, Number]
+   },
+-  setup(props, { slots }) {
++  setup(props, { slots, expose }) {
+     const instance = getCurrentInstance();
+     const sharedContext = instance.ctx;
+     if (!sharedContext.renderer) {
+@@ -2548,6 +2548,7 @@ const KeepAliveImpl = {
+     }
+     const cache = /* @__PURE__ */ new Map();
+     const keys = /* @__PURE__ */ new Set();
++    expose({ cache })
+     let current = null;
+     {
+       instance.__v_cache = cache;
+diff --git a/node_modules/@vue/runtime-core/dist/runtime-core.cjs.prod.js b/node_modules/@vue/runtime-core/dist/runtime-core.cjs.prod.js
+index e87030b..386b528 100644
+--- a/node_modules/@vue/runtime-core/dist/runtime-core.cjs.prod.js
++++ b/node_modules/@vue/runtime-core/dist/runtime-core.cjs.prod.js
+@@ -1891,7 +1891,7 @@ const KeepAliveImpl = {
+     exclude: [String, RegExp, Array],
+     max: [String, Number]
+   },
+-  setup(props, { slots }) {
++  setup(props, { slots, expose }) {
+     const instance = getCurrentInstance();
+     const sharedContext = instance.ctx;
+     if (!sharedContext.renderer) {
+@@ -1902,6 +1902,7 @@ const KeepAliveImpl = {
+     }
+     const cache = /* @__PURE__ */ new Map();
+     const keys = /* @__PURE__ */ new Set();
++    expose({ cache })
+     let current = null;
+     const parentSuspense = instance.suspense;
+     const {
+diff --git a/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js b/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js
+index ba76e89..68b8197 100644
+--- a/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js
++++ b/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js
+@@ -2552,7 +2552,7 @@ const KeepAliveImpl = {
+     exclude: [String, RegExp, Array],
+     max: [String, Number]
+   },
+-  setup(props, { slots }) {
++  setup(props, { slots, expose }) {
+     const instance = getCurrentInstance();
+     const sharedContext = instance.ctx;
+     if (!sharedContext.renderer) {
+@@ -2563,6 +2563,7 @@ const KeepAliveImpl = {
+     }
+     const cache = /* @__PURE__ */ new Map();
+     const keys = /* @__PURE__ */ new Set();
++    expose({ cache })
+     let current = null;
+     if (!!(process.env.NODE_ENV !== "production") || __VUE_PROD_DEVTOOLS__) {
+       instance.__v_cache = cache;
