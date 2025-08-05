@@ -5,6 +5,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import path, { resolve } from 'path'
 import { visualizer } from 'rollup-plugin-visualizer'
 import AutoImport from 'unplugin-auto-import/vite'
+import TurboConsole from 'unplugin-turbo-console/vite'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 import viteCompression from 'vite-plugin-compression'
@@ -13,7 +14,6 @@ import { createStyleImportPlugin, VxeTableResolve } from 'vite-plugin-style-impo
 
 import { PROXY_URL_MAP } from './src/static/environment'
 import viteDevProxyInfo from './vite-plugins/dev-proxy-info'
-
 // 是否为快速构建: 快速构建时，不进行降级兼容、保留console & debugger
 const fasterBuild = ['test', 'test2'].includes(process.env.npm_config_target_server as string)
 
@@ -28,6 +28,18 @@ export default defineConfig({
 				renderLegacyChunks: false,
 				modernPolyfills: true,
 				renderModernChunks: true
+			}),
+		process.env.NODE_ENV === 'development' &&
+			TurboConsole({
+				prefix: `${new Date().toLocaleString()}`,
+				highlight: {
+					themeDetect: true,
+					extendedPathFileNames: ['static', 'tool', 'index', 'Detail', 'api']
+				},
+				// 启用编辑器跳转功能
+				launchEditor: {
+					specifiedEditor: 'cursor'
+				}
 			}),
 		AutoImport({
 			imports: [
