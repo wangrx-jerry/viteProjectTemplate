@@ -78,8 +78,6 @@ function removeCancelRequest(config) {
 
 service.interceptors.request.use(
 	(config) => {
-		config.url = config.url.includes('client-api/') || config.url.includes('ali-oss/') ? config.url : `/client-api/development${config.url}`
-
 		if (config.cancelPreviousRequest) {
 			cancelPreviousRequestIfExist(config)
 			cacheCancelRequest(config)

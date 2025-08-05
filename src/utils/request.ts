@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios'
 
-import { isEmpty } from '@/assets/utils/common'
+import { isEmpty } from '@/utils/common'
 
 export function transferResponse<T extends Elink.AnyObject | number | string>(response: AxiosResponse<T>) {
 	return new Promise<T>((resolve, reject) => {

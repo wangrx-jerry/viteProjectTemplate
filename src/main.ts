@@ -9,7 +9,7 @@ import Element, { dayjs } from 'element-plus'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import { createApp } from 'vue'
 
-// import service from '@/api/axiosSetting.js'
+import service from '@/api/axiosSetting.js'
 // import store from '@/store/vuex/index.js'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
@@ -19,7 +19,7 @@ import App from './App.vue'
 import router from './router/index'
 
 const app = createApp(App)
-// app.config.globalProperties.axios = service
+app.config.globalProperties.axios = service
 
 app.use(router)
 	.use(Element)

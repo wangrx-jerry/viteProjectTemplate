@@ -8,6 +8,8 @@
 import { ref } from 'vue'
 
 const a = ref('1')
+
+console.log('auto import', isEmpty(a.value))
 </script>
 
 <style scoped lang="scss"></style>

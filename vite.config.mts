@@ -62,7 +62,7 @@ export default defineConfig({
 					dayjs: [['default', 'dayjs']]
 				}
 			],
-			dirs: ['src/hooks', 'src/assets/utils', 'src/static', 'src/store/browser'],
+			dirs: ['src/hooks', 'src/utils', 'src/static', 'src/store/browser'],
 			dts: 'typings/auto-import.d.ts',
 			vueTemplate: true,
 			eslintrc: { enabled: false } // 需要更新 .eslintrc-auto-import.json 文件时，再打开重新运行
