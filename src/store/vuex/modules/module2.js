@@ -1,16 +1,17 @@
 const state = {
-	someState: 11
+	module2State: 2
 }
 
 const mutations = {
-	UPDATE_STATE: (state, navbar) => {
-		state.someState++
+	UPDATE_STATE: (state) => {
+		state.module2State++
 	}
 }
 
 const actions = {
-	async updateState({ commit, state }, view) {
+	async updateState({ commit }) {
 		return new Promise(async (resolve) => {
+			commit('UPDATE_STATE')
 			resolve(true)
 		})
 	}

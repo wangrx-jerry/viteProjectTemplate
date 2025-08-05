@@ -7,15 +7,23 @@ import publicPageRouter from './modules/public'
 export const DEMO = publicPageRouter
 const publicPage = ['public.ts'] // 不需要自动加载的router
 
-// you do not need `import app from './modules/*.ts'`
+// 使用 Vite 的 glob 导入功能自动加载所有路由模块
+const routeModuleFiles = import.meta.glob('./modules/*.ts', { eager: true })
 const viewRoutes: RouteRecordRaw[] = []
 
-const routerContext = import.meta.glob('./modules/*.ts', { eager: true })
-for (const [key, value] of Object.entries(routerContext)) {
-	if (publicPage.some((val) => key.includes(val))) continue
-	const module = value as { default: RouteRecordRaw[] }
-	for (const n of module.default) {
-		viewRoutes.push(n)
+for (const [path, module] of Object.entries(routeModuleFiles)) {
+	// 提取模块名：./modules/module1.ts -> module1
+	const moduleName = path.replace('./modules/', '').replace('.ts', '')
+
+	// 跳过排除的模块
+	if (publicPage.some((file) => moduleName.includes(file.replace('.ts', '')))) continue
+
+	// 展开路由配置
+	const routeModule = module as { default: RouteRecordRaw[] | RouteRecordRaw }
+	if (Array.isArray(routeModule.default)) {
+		viewRoutes.push(...routeModule.default)
+	} else {
+		viewRoutes.push(routeModule.default)
 	}
 }
 

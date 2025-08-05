@@ -1,17 +1,18 @@
 import { createLogger, createStore } from 'vuex'
 
 import getters from './getters'
-import someModule from './modules/someModule'
 
-// const modules = {}
-// const routerContext = import.meta.glob('./modules/*.js')
-// for (const [key, value] of Object.entries(routerContext)) {
-// 	Object.assign(modules, value.default)
-// 	// for (const n of value.default) {
-// 	// }
-// }
-// console.log('modules', modules)
-// console.log('getters', getters)
+// 使用 Vite 的 glob 导入功能自动加载所有模块
+const moduleFiles = import.meta.glob('./modules/*.js', { eager: true })
+const modules = {}
+for (const path in moduleFiles) {
+	// 提取文件名作为模块名：./modules/module1.js -> module1
+	const moduleName = path.replace('./modules/', '').replace('.js', '')
+	modules[moduleName] = moduleFiles[path].default
+}
+
+console.log('自动导入的模块:', modules)
+
 const debug = process.env.NODE_ENV !== 'production'
 const logger = createLogger({
 	filter(mutation, stateBefore, stateAfter) {
@@ -31,9 +32,7 @@ const logger = createLogger({
 const plugins = debug ? [logger] : []
 const store = createStore({
 	plugins,
-	modules: {
-		someModule
-	},
+	modules,
 	getters
 })
 export default store
