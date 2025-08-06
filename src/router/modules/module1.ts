@@ -7,6 +7,7 @@ const componentsRouter: RouteRecordRaw[] = [
 		name: 'Module1SomePage',
 		meta: {
 			title: '模块 1 页面'
+			// 没有 public: true，默认需要权限控制
 		}
 	}
 ]

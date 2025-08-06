@@ -10,7 +10,8 @@ const componentsRouter: RouteRecordRaw[] = [
 		name: 'Module1SomePagePublic',
 		component: async () => await import(/* webpackChunkName: "public" */ '@/views/module1/somePage/Public.vue'),
 		meta: {
-			title: 'Module1SomePagePublic'
+			title: 'Module1SomePagePublic',
+			public: true // 标识为公共路由，不需要权限控制
 		}
 	}
 ]
